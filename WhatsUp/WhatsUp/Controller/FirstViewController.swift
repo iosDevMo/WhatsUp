@@ -14,6 +14,12 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func signUpButtonPressed(_ sender: UIButton) {
+        
+    }
 }
 
