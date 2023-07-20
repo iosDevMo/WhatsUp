@@ -10,11 +10,15 @@ import Firebase
 
 class ChatViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var messageTextField: UITextField!
     
+    var messages = ["hi", "hello"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
         navigationItem.setHidesBackButton(true, animated: true)
     }
     
@@ -29,6 +33,23 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
+        messages.append(messageTextField.text!)
+        tableView.reloadData()
+        messageTextField.text = nil
     }
 
+}
+
+extension ChatViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath)
+        cell.textLabel?.text = messages[indexPath.row]
+        return cell
+    }
+    
+    
 }
