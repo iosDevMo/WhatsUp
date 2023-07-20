@@ -96,10 +96,10 @@
                                     <action selector="signUpPressed:" destination="QmP-kK-UJW" eventType="touchUpInside" id="bcP-Af-jf7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoB-gg-WJ3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoB-gg-WJ3">
                                 <rect key="frame" x="80" y="625" width="233" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -112,7 +112,7 @@
                         <outlet property="emailTextField" destination="cts-F4-lqA" id="8KN-LN-dpi"/>
                         <outlet property="errorLabel" destination="IoB-gg-WJ3" id="7gh-03-3iU"/>
                         <outlet property="passwordTextField" destination="TWJ-DE-sAg" id="WLH-BO-QO0"/>
-                        <segue destination="skg-n0-l8l" kind="show" id="nsy-hx-Xxl"/>
+                        <segue destination="skg-n0-l8l" kind="show" identifier="signUpToChat" id="nsy-hx-Xxl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6N-PL-Mcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -157,6 +157,13 @@
                                     <action selector="loginPressed:" destination="daR-QL-YAi" eventType="touchUpInside" id="qMs-VA-QYI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bA-Xp-KVd">
+                                <rect key="frame" x="81" y="656" width="231" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemPinkColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SKt-B6-ZAW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -164,8 +171,9 @@
                     <navigationItem key="navigationItem" id="lir-9w-pdb"/>
                     <connections>
                         <outlet property="emailTextField" destination="j2n-tO-YkN" id="Ljl-MV-kMq"/>
+                        <outlet property="errorLabel" destination="2bA-Xp-KVd" id="8nQ-1K-UHp"/>
                         <outlet property="passwordTextField" destination="cC3-no-Rzr" id="ddX-E6-RQg"/>
-                        <segue destination="skg-n0-l8l" kind="show" id="Mp0-9Y-qtR"/>
+                        <segue destination="skg-n0-l8l" kind="show" identifier="loginToChat" id="Mp0-9Y-qtR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ls5-T3-NOy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -244,6 +252,9 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
