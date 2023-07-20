@@ -14,7 +14,8 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var messageTextField: UITextField!
     
-    var messages = ["hi", "hello"]
+    var messages = [Message]()
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,10 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
-        messages.append(messageTextField.text!)
+       
+        let message = Message(sender: Auth.auth().currentUser?.email, body: messageTextField.text!)
+        saveMessage(message)
+        messages.append(message)
         tableView.reloadData()
         messageTextField.text = nil
     }
@@ -47,9 +51,21 @@ extension ChatViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath)
-        cell.textLabel?.text = messages[indexPath.row]
+        cell.textLabel?.text = messages[indexPath.row].body
         return cell
     }
-    
+    func saveMessage (_ message : Message){
+        var ref: DocumentReference? = nil
+        ref = db.collection("cities").addDocument(data: [
+            "body": message.body!,
+            "sender": message.sender!
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
     
 }
