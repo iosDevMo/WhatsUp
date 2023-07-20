@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -23,6 +23,12 @@ class LoginViewController: UIViewController {
     // MARK: - Navigation
 
     @IBAction func loginPressed(_ sender: UIButton) {
+        let email = emailTextField.text!
+        let password = passwordTextField.text!
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          guard let strongSelf = self else { return }
+          // ...
+        }
     }
     
 }

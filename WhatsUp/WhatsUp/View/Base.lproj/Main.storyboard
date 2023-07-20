@@ -96,6 +96,13 @@
                                     <action selector="signUpPressed:" destination="QmP-kK-UJW" eventType="touchUpInside" id="bcP-Af-jf7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoB-gg-WJ3">
+                                <rect key="frame" x="80" y="625" width="233" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="let-el-u3j"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -103,6 +110,7 @@
                     <navigationItem key="navigationItem" id="cAJ-F7-J29"/>
                     <connections>
                         <outlet property="emailTextField" destination="cts-F4-lqA" id="8KN-LN-dpi"/>
+                        <outlet property="errorLabel" destination="IoB-gg-WJ3" id="7gh-03-3iU"/>
                         <outlet property="passwordTextField" destination="TWJ-DE-sAg" id="WLH-BO-QO0"/>
                         <segue destination="skg-n0-l8l" kind="show" id="nsy-hx-Xxl"/>
                     </connections>
@@ -236,6 +244,9 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
