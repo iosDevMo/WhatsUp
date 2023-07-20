@@ -20,6 +20,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        readMessage()
         navigationItem.setHidesBackButton(true, animated: true)
     }
     
@@ -37,8 +38,8 @@ class ChatViewController: UIViewController {
        
         let message = Message(sender: Auth.auth().currentUser?.email, body: messageTextField.text!)
         saveMessage(message)
-        messages.append(message)
-        tableView.reloadData()
+        //messages.append(message)
+        //tableView.reloadData()
         messageTextField.text = nil
     }
 
@@ -58,7 +59,8 @@ extension ChatViewController : UITableViewDataSource {
         var ref: DocumentReference? = nil
         ref = db.collection("cities").addDocument(data: [
             "body": message.body!,
-            "sender": message.sender!
+            "sender": message.sender!,
+            "time": Date().timeIntervalSince1970
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -67,5 +69,27 @@ extension ChatViewController : UITableViewDataSource {
             }
         }
     }
-    
+    func readMessage(){
+        db.collection("messages").order(by: "time").addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+            
+            self.messages.removeAll()
+            
+            for doc in documents {
+                let msgBody = doc.data()["body"] as! String
+                let msgSender = doc.data()["sender"] as! String
+                let msgs = Message(sender: msgSender, body: msgBody)
+                self.messages.append(msgs)
+                self.tableView.reloadData()
+            }
+            
+            let indexPath = IndexPath(row: self.messages.count-1, section: 0)
+            if indexPath.row > 5 {
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+            }
+    }
 }
