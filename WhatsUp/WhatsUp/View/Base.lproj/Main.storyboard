@@ -83,7 +83,7 @@
                                 <rect key="frame" x="80" y="424" width="233" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAy-o2-2y5">
                                 <rect key="frame" x="80" y="530" width="233" height="57"/>
@@ -138,7 +138,7 @@
                                 <rect key="frame" x="81" y="474" width="231" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j2n-tO-YkN">
                                 <rect key="frame" x="81" y="381" width="231" height="34"/>
@@ -214,7 +214,13 @@
                         <viewLayoutGuide key="safeArea" id="Qya-5d-Of2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="kfZ-yO-47V"/>
+                    <navigationItem key="navigationItem" id="kfZ-yO-47V">
+                        <barButtonItem key="rightBarButtonItem" title="SignOut" id="FiN-kR-PNL">
+                            <connections>
+                                <action selector="signOutPressed:" destination="skg-n0-l8l" id="mg9-O9-4af"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="messageTextField" destination="GBg-c5-fWD" id="BUT-3T-n2M"/>
                     </connections>

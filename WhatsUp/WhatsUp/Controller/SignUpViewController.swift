@@ -31,6 +31,7 @@ class SignUpViewController: UIViewController {
         
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error == nil {
+                self.performSegue(withIdentifier: "signUpToChat", sender: self)
                 print("user succesd")
             }else {
                 print(error.debugDescription)
