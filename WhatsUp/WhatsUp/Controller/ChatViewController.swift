@@ -69,7 +69,7 @@ extension ChatViewController : UITableViewDataSource {
     
     func saveMessage (_ message : Message){
         var ref: DocumentReference? = nil
-        ref = db.collection("cities").addDocument(data: [
+        ref = db.collection("messages").addDocument(data: [
             "body": message.body!,
             "sender": message.sender!,
             "time": Date().timeIntervalSince1970
