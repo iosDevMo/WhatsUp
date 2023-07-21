@@ -20,8 +20,12 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        messageTextField.delegate = self
+        tableView.register(UINib(nibName: "SenderTableViewCell", bundle: nil), forCellReuseIdentifier: "senderCell")
+        tableView.register(UINib(nibName: "ReceiverTableViewCell", bundle: nil), forCellReuseIdentifier: "receiverCell")
         readMessage()
         navigationItem.setHidesBackButton(true, animated: true)
+        
     }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
@@ -38,8 +42,8 @@ class ChatViewController: UIViewController {
        
         let message = Message(sender: Auth.auth().currentUser?.email, body: messageTextField.text!)
         saveMessage(message)
-        //messages.append(message)
-        //tableView.reloadData()
+        messages.append(message)
+        tableView.reloadData()
         messageTextField.text = nil
     }
 
@@ -51,10 +55,18 @@ extension ChatViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath)
-        cell.textLabel?.text = messages[indexPath.row].body
-        return cell
+        if messages[indexPath.row].sender == Auth.auth().currentUser?.email {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "senderCell", for: indexPath) as! SenderTableViewCell
+            cell.label.text = messages[indexPath.row].body
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "receiverCell", for: indexPath) as! ReceiverTableViewCell
+            cell.label.text = messages[indexPath.row].body
+            return cell
+        }
+        
     }
+    
     func saveMessage (_ message : Message){
         var ref: DocumentReference? = nil
         ref = db.collection("cities").addDocument(data: [
@@ -69,6 +81,7 @@ extension ChatViewController : UITableViewDataSource {
             }
         }
     }
+    
     func readMessage(){
         db.collection("messages").order(by: "time").addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
@@ -91,5 +104,16 @@ extension ChatViewController : UITableViewDataSource {
                 self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             }
+    }
+}
+
+extension ChatViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let message = Message(sender: Auth.auth().currentUser?.email, body: messageTextField.text!)
+        saveMessage(message)
+        messages.append(message)
+        tableView.reloadData()
+        messageTextField.text = nil
+        return true
     }
 }
